@@ -1,0 +1,31 @@
+html, body {
+	width: 100px;
+}
+
+.hidden {
+	display: none;
+}
+
+.button {
+	margin: 3% auto;
+	padding: 4px;
+	text-align: center;
+	font-size: 1.5em;
+	cursor: pointer;
+}
+
+#settings {
+	background-color: #D3D3D3;
+}
+
+#collect {
+	background-color: #B7E9F7;
+}
+
+#export {
+	background-color: #FDFD96;
+}
+
+#reset {
+	background-color: #FF9A98;
+}
