@@ -68,7 +68,7 @@
 			leadsInfo.push([name, title, company]);
 		}
 		// retrieve previously collected data from local storage
-		browser.storage.local.get("leadsInfo", function(result) {
+		chrome.storage.local.get("leadsInfo", function(result) {
 			let retrievedStorage = result.leadsInfo;
 			// stringify for lazy dupe searching
 			let unparsedStorage = JSON.stringify(retrievedStorage);
@@ -88,7 +88,7 @@
 			}
 			addLeadCounter(leadsInfo.length);
 			// save collected data to local storage
-			browser.storage.local.set({"leadsInfo": leadsInfo});
+			chrome.storage.local.set({"leadsInfo": leadsInfo});
 			console.log(leadsInfo);
 		});
 	}
@@ -125,7 +125,7 @@
 	 */
 	function resetLeads() {
 		// clear data stored in local storage
-		browser.storage.local.remove("leadsInfo", function() {
+		chrome.storage.local.remove("leadsInfo", function() {
 			console.log("reset stored leads");
 			// if count element exists on page, update it
 			if (document.getElementById("helper-counter")) {
@@ -152,7 +152,7 @@
 	 * Listen for messages from the background script.
 	 * Call appropriate method.
 	*/
-	browser.runtime.onMessage.addListener((message) => {
+	chrome.runtime.onMessage.addListener((message) => {
 		if (message.command === "collect") {
 			// after a lot of storage f-ery, i think this handles it
 			collectLeads();

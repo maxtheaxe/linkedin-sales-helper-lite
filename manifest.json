@@ -29,14 +29,6 @@
 		"page": "settings/options.html"
 	},
 
-	"browser_specific_settings": {
-		"gecko": {
-			"id": "litefox@linkedinsaleshelper.com"
-		}
-	},
-
-	// update_url
-
 	"browser_action": {
 		"default_icon": "icons/linkedin-sales-helper.png",
 		// "theme_icons": [{

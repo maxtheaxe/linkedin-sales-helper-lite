@@ -13,7 +13,7 @@ function listenForClicks() {
 		 * send a "collect" message to the content script in the active tab.
 		 */
 		function collect(tabs) {
-			browser.tabs.sendMessage(tabs[0].id, {
+			chrome.tabs.sendMessage(tabs[0].id, {
 				command: "collect"
 			});
 		}
@@ -22,7 +22,7 @@ function listenForClicks() {
 		 * send a "search" message to the content script in the active tab.
 		 */
 		function search(tabs) {
-			browser.tabs.sendMessage(tabs[0].id, {
+			chrome.tabs.sendMessage(tabs[0].id, {
 				command: "search"
 			});
 		}
@@ -32,7 +32,7 @@ function listenForClicks() {
 		 * send a "reset" message to the content script in the active tab.
 		 */
 		function reset(tabs) {
-			browser.tabs.sendMessage(tabs[0].id, {
+			chrome.tabs.sendMessage(tabs[0].id, {
 				command: "reset",
 			});
 		}
@@ -43,9 +43,9 @@ function listenForClicks() {
 		 */
 		function exportInfo(tabs) {
 			// in background script, so DL api can be accessed
-			browser.runtime.sendMessage("export");
+			chrome.runtime.sendMessage("export");
 			// if it were in content script
-			// browser.tabs.sendMessage(tabs[0].id, {
+			// chrome.tabs.sendMessage(tabs[0].id, {
 			// 	command: "export"
 			// });
 		}
@@ -62,27 +62,33 @@ function listenForClicks() {
 		 * then call appropriate method.
 		 */
 		if (e.target.id === "collect") {
-			browser.tabs.query({active: true, currentWindow: true})
-				.then(collect)
-				.catch(reportError);
+			chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+				collect(tabs);
+			});
+				// .then(collect)
+				// .catch(reportError);
 		}
 		// else if (e.target.id === "search") {
-		// 	browser.tabs.query({active: true, currentWindow: true})
+		// 	chrome.tabs.query({active: true, currentWindow: true})
 		// 		.then(search)
 		// 		.catch(reportError);
 		// }
 		else if (e.target.id === "reset") {
-			browser.tabs.query({active: true, currentWindow: true})
-				.then(reset)
-				.catch(reportError);
+			chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+				reset(tabs);
+			});
+				// .then(reset)
+				// .catch(reportError);
 		}
 		else if (e.target.id === "export") {
-			browser.tabs.query({active: true, currentWindow: true})
-				.then(exportInfo)
-				.catch(reportError);
+			chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+				exportInfo(tabs);
+			});
+				// .then(exportInfo)
+				// .catch(reportError);
 		}
 		else if (e.target.id === "settings") {
-			var openingPage = browser.runtime.openOptionsPage();
+			var openingPage = chrome.runtime.openOptionsPage();
 		}
 	});
 }
@@ -102,8 +108,10 @@ function listenForClicks() {
  * and add a click handler.
  * If we couldn't inject the script, handle the error.
  */
-browser.tabs.executeScript({file: "/content_scripts/helper.js"})
-.then(listenForClicks)
+chrome.tabs.executeScript({file: "/content_scripts/helper.js"}, function() {
+	listenForClicks();
+});
+// .then(listenForClicks)
 // .catch(reportExecuteScriptError);
 
 // listenForClicks();

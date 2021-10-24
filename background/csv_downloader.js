@@ -1,13 +1,13 @@
 // csv_downloader.js for linkedin-sales-helper by maxtheaxe
 
-browser.runtime.onMessage.addListener(handleMessage);
+chrome.runtime.onMessage.addListener(handleMessage);
 
 
 /**
  * handle messages "heard" by event listener
  */
 function handleMessage(request, sender, sendResponse) {
-	browser.storage.sync.get("settings", function(result) {
+	chrome.storage.sync.get("settings", function(result) {
 		// console.log(`namesplit: ${result.settings.nameSplitSetting}`);
 		if (result.settings === undefined) {
 			var nameSplit = false;
@@ -25,7 +25,7 @@ function handleMessage(request, sender, sendResponse) {
  */
 function exportLeads(nameSplit) {
 	console.log("exporting!");
-	browser.storage.local.get("leadsInfo", function(result) {
+	chrome.storage.local.get("leadsInfo", function(result) {
 		let leadsInfo = result.leadsInfo;
 		// setup csv data
 		let now = new Date();
@@ -57,7 +57,7 @@ function exportLeads(nameSplit) {
 		let csvData = new Blob([csv], { type: "text/csv" });  
 		let csvURL = window.URL.createObjectURL(csvData);
 		console.log(csvURL);
-		browser.downloads.download({
+		chrome.downloads.download({
 			url: csvURL,
 			filename: fileName,
 			saveAs: true
