@@ -10,18 +10,10 @@
 	},
 
 	"permissions": [
-		// "activeTab",
 		"downloads",
 		"storage",
 		"*://*.linkedin.com/sales/*"
 	],
-
-	// "content_scripts": [ // ref: https://stackoverflow.com/a/7655808/4513452
-	// 	{
-	// 		"matches": ["*://*.linkedin.com/sales/*", "*://*.zoominfo.com/*"],
-	// 		"js": ["content_scripts/helper.js"]
-	// 	}
-	// ],
 
 	"options_ui": {
 		"browser_style": true,
@@ -31,11 +23,6 @@
 
 	"browser_action": {
 		"default_icon": "icons/linkedin-sales-helper.png",
-		// "theme_icons": [{
-		// 		"light": "icons/beasts-32-light.png",
-		// 		"dark": "icons/beasts-32.png",
-		// 		"size": 32
-		// }],
 		"default_title": "linkedin sales helper lite",
 		"default_popup": "popup/toolbox.html"
 	},
