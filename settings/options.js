@@ -17,15 +17,22 @@ function restoreOptions() {
 	function setCurrentChoice(result) {
 		// console.log(result.settings.zoomManualSetting, result.settings.nameSplitSetting);
 		// zoomManual.checked = result.settings.zoomManualSetting;
-		nameSplit.checked = result.settings.nameSplitSetting;
+		if (result.settings === undefined) {
+			nameSplit.checked = false;
+		}
+		else {
+			nameSplit.checked = result.settings.nameSplitSetting;
+		}
 	}
 
 	function onError(error) {
 		console.log(`Error: ${error}`);
 	}
 
-	let getting = chrome.storage.sync.get("settings");
-	getting.then(setCurrentChoice, onError);
+	chrome.storage.sync.get("settings", function(result) {
+		setCurrentChoice(result);
+	});
+	// getting.then(setCurrentChoice, onError);
 }
 
 document.addEventListener("DOMContentLoaded", restoreOptions);

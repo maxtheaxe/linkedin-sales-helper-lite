@@ -59,7 +59,10 @@
 		// extract, collect data about each lead (and clean up)
 		for (let i = 0; i < leadNames.length; i++) {
 			// extract name, remove whitespace/qualifications
-			let name = leadNames[i].textContent.trim().split(",")[0]
+			let name = leadNames[i].textContent.trim().split(",")[0];
+			// **should add general non alpha stripping later**
+			// non alphanumeric chars don't work for zoominfo searches
+			name = name.split("(")[0].trim();
 			// extract title (with commas stripped for csv later)
 			let title = leadTitles[i].textContent.trim().replaceAll(",", "");
 			// extract company (with commas stripped for csv later)

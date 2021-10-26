@@ -1,5 +1,6 @@
 html, body {
 	width: 100px;
+	/*padding-right: 15px;*/
 }
 
 .hidden {
@@ -28,4 +29,9 @@ html, body {
 
 #reset {
 	background-color: #FF9A98;
+}
+
+a {
+	color: inherit;
+	text-decoration: inherit;
 }
