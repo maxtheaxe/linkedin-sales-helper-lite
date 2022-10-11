@@ -1,2 +1,2 @@
 # linkedin-sales-helper-lite
-issues for both versions should be tracked here
+merged lite and pro versions, see [linkedin-sales-helper](https://github.com/maxtheaxe/linkedin-sales-helper)
